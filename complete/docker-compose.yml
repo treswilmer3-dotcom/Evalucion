@@ -18,17 +18,12 @@ services:
       timeout: 5s
       retries: 5
 
-  springboot-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: spring-boot-docker-app
+  app:
+    image: wilinvestiga/spring-boot-app:v1.0.0
+    container_name: spring-boot-app
     restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
     ports:
-      - "8080:8080"
+      - "8282:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/personasdb
@@ -36,6 +31,9 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL-AUTO=update
       - TZ=America/Mexico_City
+    depends_on:
+      db:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 30s
