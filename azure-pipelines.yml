@@ -3,9 +3,9 @@ trigger:
 
 variables:
   vmImage: 'ubuntu-latest'
-  dockerRegistryServiceConnection: 'DockerHub'  # Nombre de la conexión a Docker Hub
-  imageRepository: 'wilinvestiga/spring-boot-app'  # Tu repositorio en Docker Hub
-  containerRegistry: 'docker.io'  # Docker Hub
+  dockerRegistryServiceConnection: 'DockerHub'  
+  imageRepository: 'wilinvestiga/spring-boot-app'  
+  containerRegistry: 'docker.io'  
   dockerfilePath: 'complete/Dockerfile'
   tag: '$(Build.BuildId)'
   
